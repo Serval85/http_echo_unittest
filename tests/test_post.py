@@ -58,7 +58,7 @@ class TestPost(TestCase):
 
         self.assertEqual(r.status_code, config['STATUS'])
         self.assertEqual(r.reason, config['REASON'])
-        self.assertEqual(r_data, req_data)
+        self.assertEqual(r_data, req_data)  # for exp equal lists
 
     def test_post_cyr(self):
         with open(config['FILE_NAME'], 'rb') as file:
@@ -76,6 +76,24 @@ class TestPost(TestCase):
         data = r.json()
         self.assertTrue(data.get('id'))
         self.assertEqual(data.get('name'), 'трололо')
+        self.assertEqual(data.get('tag'), config['TAG'])
+        self.assertEqual(data.get('size'), file_size)
+
+    def test_post_dig(self):
+        with open(config['FILE_NAME'], 'rb') as file:
+            payload = file.read()
+        file_size = os.path.getsize(config['FILE_NAME'])
+        params = {'id': 123456, 'name': 123456, 'tag': config['TAG']}
+
+        r = requests.post('http://' + config['IP'] + ':' +
+                          str(config['PORT']) + '/api/upload',
+                          data=payload, params=params)
+
+        self.assertEqual(r.status_code, config['STATUS'])
+        self.assertEqual(r.reason, config['REASON'])
+        data = r.json()
+        self.assertEqual(data.get('id'), '123456')
+        self.assertEqual(data.get('name'), '123456')
         self.assertEqual(data.get('tag'), config['TAG'])
         self.assertEqual(data.get('size'), file_size)
 
