@@ -24,4 +24,6 @@ def get_config():
             config['REASON'] = 'Created'
         if not config.get('STATUS'):
             config['STATUS'] = 201
-    return config
+        main_uri = 'http://' + str(config['IP']) + \
+                   ':' + str(config['PORT'])
+    return config, main_uri
