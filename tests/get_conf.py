@@ -24,6 +24,8 @@ def get_config():
             config['REASON'] = 'Created'
         if not config.get('STATUS'):
             config['STATUS'] = 201
+        if not config.get('FILE_TYPE'):
+            config['FILE_TYPE'] = 'image/jpeg'
         main_uri = 'http://' + str(config['IP']) + \
                    ':' + str(config['PORT'])
     return config, main_uri

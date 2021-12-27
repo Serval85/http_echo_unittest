@@ -9,3 +9,4 @@ STATUS: 201
 MASS_FILES: ['programmers and other.jpg', 'programmers and other1.jpg',
              'programmers and other2.jpg', 'programmers.jpg',
              'and other.jpg', 'file']
+FILE_TYPE: image/jpeg
