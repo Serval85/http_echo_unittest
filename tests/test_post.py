@@ -154,7 +154,7 @@ class TestPost(TestCase):
         r = requests.get(self.main_uri + '/api/download', params=params)
         downloaded_file = r.content
         self.assertEqual(r.headers.get('Content-Disposition'),
-                         self.config['FILE_NAME'])
+                         'attachment; filename=' + self.config['FILE_NAME'])
         self.assertEqual(self.payload, downloaded_file)
 
 
